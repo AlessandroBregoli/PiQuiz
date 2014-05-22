@@ -20,3 +20,21 @@ function newAjax() {
 	}
 	return xmlHttp;
 }
+
+function getStep(src,func){
+	var ajax= newAjax();
+	ajax.open("GET",src,true);
+	ajax.send(null);
+	ajax.onreadystatechange= function(){
+		if (ajax.readyState == 4) {
+			if( ajax.status == 200){
+				try{
+					func(JSON.parse(ajax.responseText));
+				}
+				catch(e){
+					alert('Error name: '+e.name+'\nError message: '+e.message+'\nScript: \n'+ajax.responseText);
+				}
+			}
+		}
+	}
+}

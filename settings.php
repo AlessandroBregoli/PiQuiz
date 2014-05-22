@@ -5,6 +5,7 @@ define("ROOT", realpath(dirname(__FILE__))."/");
 define("DATABASES", ROOT."dbDomande/");
 define("INCLUDES", ROOT."lib/");
 define("STEPS", ROOT."steps/");
+define("STATICS", ROOT."static/");
 define("ACCESSI", ROOT."accessi.txt");
 define("PINGTIMEOUT",30);
 
