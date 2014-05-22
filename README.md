@@ -1,2 +1,2 @@
-PIquiz
+PiQuiz
 ======
