@@ -1,4 +1,5 @@
 var pingInterval = 10000;
+var mainLoopInterval = 2000;
 var entryFile = "entry.php?step=";
 function $(id){
 	return document.getElementById(id);

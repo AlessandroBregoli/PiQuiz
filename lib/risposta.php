@@ -7,9 +7,11 @@ abstract class TipoRisposta
 class Risposta{
 	public $tipo;
 	public $contenuto;
-	public function __construct($contenuto, $tipo = TipoRisposta::Successo){
+	public $data;
+	public function __construct($contenuto, $tipo = TipoRisposta::Successo,$data=null){
 		$this->contenuto = $contenuto;
 		$this->tipo = $tipo;
+		$this->data = $data;
 	}
 }
 ?>

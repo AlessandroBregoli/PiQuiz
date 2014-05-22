@@ -1,10 +1,6 @@
 <?php
 include("settings.php");
-if (isset($_SESSION['uname'])){
-	$u = $_SESSION['uname'];
-}
-else {
-	echo "Benvenuto. ti voglio chiamare giovanni";
-	$_SESSION['uname']="giovanni";
-}
+$html = file_get_contents(STATICS."client.html");
+$html = str_replace("{STATICS}","./static/",$html);
+echo $html;
 ?>

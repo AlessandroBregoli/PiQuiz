@@ -7,6 +7,7 @@ define("INCLUDES", ROOT."lib/");
 define("STEPS", ROOT."steps/");
 define("STATICS", ROOT."static/");
 define("ACCESSI", ROOT."accessi.txt");
+define("CODAEVENTI", ROOT."eventi.txt");
 define("PINGTIMEOUT",30);
 
 function getExtension($nomeFile){

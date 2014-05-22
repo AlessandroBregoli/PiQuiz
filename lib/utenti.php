@@ -11,29 +11,29 @@ class Utente{
 }
 function registerUser($nome){
     
-    $accessi = getUsers();
+    $accessi = getSerializzato();
     $super = count($accessi) == 0;
     //se l'utente esiste, aggiorna il taimstamp del ping
     if(isset($accessi[$nome]))
 	$accessi[$nome]->timestamp= time();
     //altrimenti lo aggiunge.
     else $accessi[$nome] = new Utente(time(),$super);
-    setUsers($accessi);
+    setSerializzato($accessi);
 }
-function getUsers(){
-    if(!file_exists(ACCESSI)){
-        $fp= fopen(ACCESSI,"w");
+function getSerializzato($file = ACCESSI){
+    if(!file_exists($file)){
+        $fp= fopen($file,"w");
         fwrite($fp,serialize(array()));
         fclose($fp);
     }
-    $fp= fopen(ACCESSI,"r");
-	$accessi = unserialize(fread($fp,filesize(ACCESSI)));
-	fclose($fp);
-	return $accessi;
+    $fp= fopen($file,"r");
+    $accessi = unserialize(fread($fp,filesize($file)));
+    fclose($fp);
+    return $accessi;
 }
 
-function setUsers($accessi){
-    $fp = fopen(ACCESSI,"w");
+function setSerializzato($accessi,$file = ACCESSI){
+    $fp = fopen($file ,"w");
 	$tentativi = 0;
 	while(!flock($fp,LOCK_EX)){
 		sleep(0.1);
@@ -48,7 +48,7 @@ function setUsers($accessi){
 
 function checkUsers(){
     $time = time();
-    $accessi = getUsers();
+    $accessi = getSerializzato();
     $modificato = false;
     foreach($accessi as $nome=>$Utente){
 	if ($time - $Utente->timestamp > PINGTIMEOUT){
@@ -57,12 +57,12 @@ function checkUsers(){
 	}
     }
     if($modificato)
-	setUsers($accessi);
+	setSerializzato($accessi);
 }
 function checkPing($uname){
     //controlla se l'utente è nei ping
     
-    $accessi = getUsers();
+    $accessi = getSerializzato();
     return isset($accessi[$uname]);
 }
 ?>
