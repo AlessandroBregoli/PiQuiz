@@ -1,1 +1,1 @@
-a:0:{}
+a:2:{s:0:"";O:6:"Utente":3:{s:9:"timestamp";i:1400773584;s:9:"punteggio";i:0;s:5:"super";b:1;}s:4:"ciao";O:6:"Utente":3:{s:9:"timestamp";i:1400793094;s:9:"punteggio";i:0;s:5:"super";b:0;}}

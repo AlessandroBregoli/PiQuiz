@@ -1,6 +1,6 @@
 <?php
 $nome = $_GET['registerUname'];
-$accessiAttuali = getUsers();
+$accessiAttuali = getSerializzato();
 if(isset($accessiAttuali[$nome])){
 	$risposta = new Risposta("Attenzione: il nome utente esiste già",TipoRisposta.Eccezione);
 }
