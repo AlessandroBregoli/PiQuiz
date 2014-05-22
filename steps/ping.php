@@ -1,3 +1,3 @@
 <?php
-registerUser($_SESSION['user']);
+registerUser($_SESSION['uname']);
 ?>
