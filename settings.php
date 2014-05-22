@@ -22,6 +22,9 @@ closedir($dir);
 
 function shutdown(){
 	//session_close();
+	if(isset($GLOBALS['risposta'])){
+		echo json_encode($GLOBALS['risposta']);
+	}
 }
 
 register_shutdown_function('shutdown');

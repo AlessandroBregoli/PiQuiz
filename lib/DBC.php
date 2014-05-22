@@ -1,8 +1,8 @@
 <?php
     class DBC{
-        $file;
-        $connection;
-        $is_connected;
+        private $file;
+        private $connection;
+        private $is_connected;
         function __construct($file){
             $this->file = $file;
             $this->user = $user;
@@ -11,10 +11,10 @@
         
         function connect(){
             if(!$this->is_connected){            
-               this->connection = sqlite_open($file, 0666, $sqlite_error);
+                $this->connection = sqlite_open($file, 0666, $sqlite_error);
                 if(!$this->connection)
                 {
-                    die(“Errore Sqlite: “.$sqlite_error);
+                    die("Errore Sqlite: ".$sqlite_error);
                 }
                 $this->is_connected = true;
         }
@@ -31,4 +31,5 @@
             }
         }
     }
+}
 ?>

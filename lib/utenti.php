@@ -48,7 +48,7 @@ function checkUsers(){
 	$modificato = false;
 	foreach($accessi as $nome=>$Utente){
 	    if ($time - $Utente->timestamp > PINGTIMEOUT){
-	        unset($nome);
+	        unset($accessi[$nome]);
 	        $modificato = true;
 	    }
 	}

@@ -6,5 +6,8 @@ if(isset ($_GET['step'])){
 	if (file_exists($nomeStep)){
 		include($nomeStep);
 	}
+	else {
+		$risposta = new Risposta("Step non trovato", TipoRisposta::Eccezione);
+	}
 }
 ?>
