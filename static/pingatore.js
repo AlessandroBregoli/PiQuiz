@@ -1,6 +1,5 @@
-var interval = setInterval(pingInterval, function(){
+var interval = setInterval(function(){
 		var ajax= newAjax();
 		ajax.open("GET",entryFile + "ping",true);
 		ajax.send(null);
-	}
-);
+	}, pingInterval);

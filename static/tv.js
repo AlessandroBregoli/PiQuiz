@@ -2,7 +2,8 @@ var mainLoop = setInterval(mainLoopInterval , function(){
 		getStep(entryFile + "TVEventi", function(risposta){
 			
 		});
-		getStep(entryFile + "pulisciAccessi",function(risposta){
-			//probabilmente questa funzione non serve
-		});
-	}
+		var ajax= newAjax();
+		ajax.open("GET",entryFile + "pulisciAccessi",true);
+		ajax.send(null);
+		
+	});
