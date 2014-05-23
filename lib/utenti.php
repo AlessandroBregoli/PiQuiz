@@ -8,6 +8,17 @@ class Utente{
         $this->punteggio = 0;
 	$this->super = $super;
     }
+    //algoritmo ultracomplesso per il calcolo del punteggio
+    public function calcolaPunteggio($punteggio){
+		$this->punteggio +=$punteggio;
+	}
+}
+function aggiungiPunti($nome, $punteggio){
+	$accessi = getSerializzato();
+	if(isset($accessi[$nome])){
+		$accessi[$nome]->calcolaPunteggio($punteggio);
+		setSerializzato($accessi);
+	 }
 }
 function registerUser($nome){
     
