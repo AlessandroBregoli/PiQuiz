@@ -4,7 +4,11 @@ function aggiungiEvento($oggetto){
 	$eventi[] = $oggetto;
 	setSerializzato($eventi, CODAEVENTI);
 }
-
+function pullEventi(){
+	$eventi = getUsers(CODAEVENTI);
+	eliminaEventi();
+	return $eventi;
+}
 function eliminaEventi(){
 	getSerializzato(array(),CODAEVENTI);
 }

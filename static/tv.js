@@ -1,5 +1,5 @@
 var mainLoop = setInterval(mainLoopInterval , function(){
-		getStep(entryFile + "cosaSuccede", function(risposta){
+		getStep(entryFile + "TVEventi", function(risposta){
 			
 		});
 	}
