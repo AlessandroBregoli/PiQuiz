@@ -39,10 +39,10 @@ controllaUtenti();
 var usersLoop = setInterval (controllaUtenti, usersLoopInterval);
 EventLib.init(Dispositivo.tv);
 EventLib.pollEventi();
-var intervallo1 = setInterval(EventLib.pollEventi, pollingInterval);
 
 
-function arrossisci(){
-	document.body.style.background = "red";
+function arrossisci(colore){
+	document.body.style.background = colore;
 }
 EventLib.registerService("arrossisci", arrossisci);
+var intervallo1 = setInterval(EventLib.pollEventi, pollingInterval);

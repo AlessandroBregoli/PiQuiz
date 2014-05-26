@@ -31,5 +31,9 @@ EventLib.pollEventi();
 var intervallo1 = setInterval(EventLib.pollEventi, pollingInterval);
 
 $('clicche').onclick = function(){
-	EventLib.requireService("PIEvent.tv.arrossisci");
+	EventLib.requireService("PIevent.tv.arrossisci",['green']);
+}
+
+$('clicche2').onclick = function(){
+	EventLib.requireService("PIevent.tv.arrossisci",['red']);
 }
