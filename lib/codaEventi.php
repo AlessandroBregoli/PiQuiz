@@ -1,9 +1,7 @@
 <?php
-abstract class Dispositivo{
-	const superClient = array(0, PREFISSO . "superClient.");
-	const client = array(1, PREFISSO . "client.");
-	const tv = array(2, PREFISSO . "tv.");
-}
+define("DispositivoSuperClient", PREFISSO . "superClient.");
+define("DispositivoClient", PREFISSO . "client.");
+define("DispositivoTv", PREFISSO . "tv.");
 class Evento{
 	public $nomeServizio;
 	public $data;

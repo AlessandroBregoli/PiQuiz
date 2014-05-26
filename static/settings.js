@@ -3,6 +3,7 @@ var eventsLoopInterval = 2000;
 var usersLoopInterval = 5000;
 var entryFile = "entry.php?step=";
 var prefisso = "PIevent.";
+var pollingInterval= 2000;
 
 function $(id){
 	return document.getElementById(id);

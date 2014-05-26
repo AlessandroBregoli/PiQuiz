@@ -25,3 +25,11 @@ function paginaSetup(){
 	//l'utente è registato
 	$('registrazione').style.display="none";
 }
+
+EventLib.init(Dispositivo.client);
+EventLib.pollEventi();
+var intervallo1 = setInterval(EventLib.pollEventi, pollingInterval);
+
+$('clicche').onclick = function(){
+	EventLib.requireService("PIEvent.tv.arrossisci");
+}

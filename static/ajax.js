@@ -24,7 +24,7 @@ function newAjax() {
 function getStep(src,func,argomenti){
 	var ajax= newAjax();
 	if(argomenti){
-		var json = JSON.encode(argomenti);
+		var json = JSON.stringify(argomenti);
 		src += "&dati=" + encodeURIComponent(json);
 	}
 	ajax.open("GET",src,true);

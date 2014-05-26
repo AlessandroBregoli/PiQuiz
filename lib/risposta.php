@@ -3,6 +3,7 @@ abstract class TipoRisposta
 {
     const Successo = 0;
     const Eccezione = 1;
+    const Niente = 2;
 }
 class Risposta{
 	public $tipo;

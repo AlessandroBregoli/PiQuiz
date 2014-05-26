@@ -10,6 +10,7 @@ var EventLib = {
 		this.prefisso = dispositivo[1];
 	},
 	registerService : function(nomeServizio, funzione, callingObject){
+		nomeServizio = this.prefisso + nomeServizio;
 		if (!callingObject)
 			callingObject = window;
 		this.serviceDict[nomeServizio] = [funzione, callingObject];
@@ -26,7 +27,15 @@ var EventLib = {
 			}
 		}
 		else {
-			getStep(entryFile + "servizio", function(){}, {'servizio': nomeServizio, 'argomenti': argList});
+			getStep(entryFile + "invoca_servizio", function(){}, {'servizio': nomeServizio, 'argomenti': argList ? argList : {}});
 		}
+	},
+	pollEventi : function(){
+		getStep(entryFile + "coda_servizi", function(risposta){
+			for(x in risposta.data){
+				alert(123);
+				EventLib.requireService(risposta.data[x].servizio, risposta.data[x].argomenti);
+			}
+		}, {'sonolatv': (this.prefisso == Dispositivo.tv)});
 	}
 }

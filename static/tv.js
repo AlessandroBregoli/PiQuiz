@@ -37,3 +37,12 @@ function controllaUtenti(){
 }
 controllaUtenti();
 var usersLoop = setInterval (controllaUtenti, usersLoopInterval);
+EventLib.init(Dispositivo.tv);
+EventLib.pollEventi();
+var intervallo1 = setInterval(EventLib.pollEventi, pollingInterval);
+
+
+function arrossisci(){
+	document.body.style.background = "red";
+}
+EventLib.registerService("arrossisci", arrossisci);
