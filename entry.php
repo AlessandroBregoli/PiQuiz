@@ -12,7 +12,7 @@ if(isset ($_GET['step'])){
 		include($nomeStep);
 	}
 	else {
-		$risposta = new Risposta("Step non trovato", TipoRisposta::Eccezione);
+		$risposta = new Risposta("Step non trovato: $nomeStep", TipoRisposta::Eccezione);
 	}
 }
 ?>

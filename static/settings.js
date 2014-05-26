@@ -8,19 +8,34 @@ var pollingInterval= 2000;
 function $(id){
 	return document.getElementById(id);
 }
-
+/*
 function getInputValues(form){
 	var inputs = form.getElementsByTagName('input');
 	var argString = "";
 	var partito = false;
 	for (x in inputs){
-		if (partito){
-			argString += "&";
+			if(inputs[x] instanceof HTMLInputElement){
+			if (partito){
+				argString += "&";
+			}
+			var nome = inputs[x].name;
+			var valore = inputs[x].value;
+			argString += nome + "=" + valore;
+			partito = true;
 		}
-		var nome = inputs[x].name;
-		var valore = inputs[x].value;
-		argString += nome + "" + valore;
-		partito = true;
 	}
 	return argString
+}*/
+function getInputValues(form){
+	var inputs = form.getElementsByTagName('input');
+	var argV = {};
+	var partito = false;
+	for (x in inputs){
+		if(inputs[x] instanceof HTMLInputElement){
+			var nome = inputs[x].name;
+			var valore = inputs[x].value;
+			argV[nome] = valore;
+		}
+	}
+	return argV;
 }

@@ -33,9 +33,8 @@ var EventLib = {
 	pollEventi : function(){
 		getStep(entryFile + "coda_servizi", function(risposta){
 			for(x in risposta.data){
-				alert(123);
-				EventLib.requireService(risposta.data[x].servizio, risposta.data[x].argomenti);
+				EventLib.requireService(risposta.data[x].nomeServizio, risposta.data[x].data);
 			}
-		}, {'sonolatv': (this.prefisso == Dispositivo.tv)});
+		}, {'sonolatv': (EventLib.prefisso == Dispositivo.tv[1])});
 	}
 }

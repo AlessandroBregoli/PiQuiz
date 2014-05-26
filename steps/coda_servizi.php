@@ -1,7 +1,7 @@
 <?php
 	$coda = getSerializzato(CODAEVENTI);
 	$disp = -1;
-	if(isset($_GET['sonolatv'])){
+	if(isset($datiJs['sonolatv']) and $datiJs['sonolatv']){
 		$disp = DispositivoTv;
 	}
 	else if(isset($_SESSION['uname'])){

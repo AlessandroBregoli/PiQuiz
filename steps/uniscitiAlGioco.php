@@ -1,5 +1,5 @@
 <?php
-	$nome = $_GET['registerUname'];
+	$nome = $datiJs['registerUname'];
 	$accessiAttuali = getSerializzato();
 	if(isset($accessiAttuali[$nome])){
 		$risposta = new Risposta("Attenzione: il nome utente esiste già",TipoRisposta::Eccezione);
