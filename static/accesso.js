@@ -1,4 +1,5 @@
 getStep(entryFile+"controllaAccesso", function(risposta){
+	alert(risposta.contenuto);
 	if(risposta.tipo == 1){
 		$('registrazione').style.display="block";
 	}
