@@ -1,0 +1,123 @@
+<?php
+//Qr generator
+$input = "i20sdfsfssdfsdfdf935039";
+$QRVersion = 26;
+$alignmentPatterns = array(6, 30, 58, 86, 114);
+$terminator= array(0,0,0,0);
+$padding = array(array(1,1,1,0,1,1,0,0), array(0,0,0,1,0,0,0,1));
+$capacity = 1367;
+function my_decbin($int,$nBit=8){
+	$binStr = decbin($int);
+	$array = array();
+	$diff = $nBit - strlen($binStr);
+	for($i = 0; $i<$diff; $i++){
+		$array[$i] = 0;
+	}
+	$len = strlen($binStr);
+	$c = 0;
+	for (; $i<$nBit; $i++){
+		$array[$i]= isset($binStr[$c])? $binStr[$c] : 0;
+		$c++;
+	}
+	return $array;
+}
+function square(&$matrix,$number, $crow,$ccol, $size){
+	$size = floor($size / 2);
+	for($x = -$size; $x <= $size; $x++){
+		for($y = -$size; $y <= $size; $y++){
+			$matrix[$crow+$x][$ccol+$y] = $number;
+		}
+	}
+}
+function add_alignment_pattern(&$matrix, $row, $col){
+	square($matrix, 3, $row,$col, 5);	//5x5 nero
+	square($matrix, 2, $row,$col, 3);	//3x3 bianco
+	square($matrix, 3, $row,$col, 1);	//1x1 nero
+}
+$arrayChar = array();
+$bitStream = array(0,1,0,0);
+$bitStream = array_merge($bitStream, my_decbin(strlen($input),16));
+for ($x = 0; $x < strlen($input);$x++){
+	$bitStream = array_merge($bitStream, my_decbin(ord($input[$x]), 8));
+}
+
+$bitStream = array_merge($bitStream, $terminator);
+
+while(count($bitStream) < $capacity*8){
+	$bitStream = array_merge($bitStream, $padding[0]);
+	if (count($bitStream) < $capacity*8){
+		$bitStream = array_merge($bitStream, $padding[1]);
+	}
+}
+/*
+echo count($bitStream)."\n";
+echo count($bitStream)%8;
+die();
+*/
+
+//print_r($bitStream);
+//tipo: byte
+
+
+$QRSize = 21 /*baseSize*/ + ($QRVersion - 1) * 4;
+
+$array = array(); 
+
+//timing pattern
+for($i = 8; $i < $QRSize-7; $i++){
+	$array[6][$i] = 2 + ($i%2 == 0);
+	$array[$i][6] = 2 + ($i%2 == 0);
+}
+
+$estremi = array($alignmentPatterns[0], $alignmentPatterns[count($alignmentPatterns)-1]);
+foreach($alignmentPatterns as $key=>$num){
+	foreach($alignmentPatterns as $key2=>$num2){
+		if (!(in_array($num,$estremi) && in_array($num2, $estremi)) || ($num == $estremi[1] && $num2 == $estremi[1])){
+			add_alignment_pattern($array,$num,$num2);
+		}
+	}
+}
+
+//add corners
+$angoli = array(3, $QRSize -4);
+foreach($angoli as $key=>$num){
+	foreach($angoli as $key2=>$num2){
+		if($num != $num2 || $num == $angoli[0]){
+			square($array, 2, $num,$num2, 9);	//9x9 bianco
+			square($array, 3, $num,$num2, 7);	//7x7 nero
+			square($array, 2, $num,$num2, 5);	//5x5 bianco
+			square($array, 3, $num,$num2, 3);	//3x3 nero
+		}
+	}
+}
+
+
+//aggiunta  
+
+
+
+
+
+
+
+header("content-type: image/png");
+
+//draw
+$ppp = 5;
+$img = imagecreate($QRSize*$ppp,$QRSize*$ppp);
+$black = imagecolorallocate($img,0,0,0);
+$white = imagecolorallocate($img,255,255,255);
+for($row = 0; $row < $QRSize; $row ++){
+	for($col = 0; $col < $QRSize; $col ++){
+		$val = isset($array[$row][$col]) ? $array[$row][$col] : 0;
+		if ($val == 1 || $val == 3){
+			$color = $black;
+		}
+		else {
+			$color = $white;
+		}
+		imagefilledrectangle($img, $col*$ppp, $row*$ppp, $col*$ppp + $ppp, $row*$ppp + $ppp, $color);
+	}
+}
+imagepng($img);
+?>

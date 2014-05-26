@@ -12,6 +12,8 @@ var TV = {
 			for (x in lista){
 				var li = document.createElement("li");
 				li.innerHTML = x;
+				if(lista[x].super)
+					li.className += " super";
 				ul.appendChild(li);
 			}
 		}
@@ -26,10 +28,12 @@ var eventsLoop = setInterval(function(){
 		ajax.send(null);*/
 		
 	}, eventsLoopInterval);
-var usersLoop = setInterval (function(){
-		getStep(entryFile + "listaUtenti", function(risposta){
-				if (risposta.tipo == 0){
-					TV.setUtenti(risposta.data);
-				}
-			});
-	}, usersLoopInterval);
+function controllaUtenti(){
+	getStep(entryFile + "listaUtenti", function(risposta){
+			if (risposta.tipo == 0){
+				TV.setUtenti(risposta.data);
+			}
+		});
+}
+controllaUtenti();
+var usersLoop = setInterval (controllaUtenti, usersLoopInterval);

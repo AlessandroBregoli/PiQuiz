@@ -2,6 +2,8 @@ var pingInterval = 10000
 var eventsLoopInterval = 2000;
 var usersLoopInterval = 5000;
 var entryFile = "entry.php?step=";
+var prefisso = "PIevent.";
+
 function $(id){
 	return document.getElementById(id);
 }
@@ -16,7 +18,7 @@ function getInputValues(form){
 		}
 		var nome = inputs[x].name;
 		var valore = inputs[x].value;
-		argString += nome + "=" + valore;
+		argString += nome + "" + valore;
 		partito = true;
 	}
 	return argString

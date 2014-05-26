@@ -21,8 +21,12 @@ function newAjax() {
 	return xmlHttp;
 }
 
-function getStep(src,func){
+function getStep(src,func,argomenti){
 	var ajax= newAjax();
+	if(argomenti){
+		var json = JSON.encode(argomenti);
+		src += "&dati=" + encodeURIComponent(json);
+	}
 	ajax.open("GET",src,true);
 	ajax.send(null);
 	ajax.onreadystatechange= function(){

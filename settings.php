@@ -2,13 +2,16 @@
 
 session_start();
 define("ROOT", realpath(dirname(__FILE__))."/");
+define("ROOTURI", (isset($_SERVER['HTTPS'])?"https://" : "http://") . gethostname() . str_replace($_SERVER['DOCUMENT_ROOT'], "", ROOT));
+define("ROOTURIIP", (isset($_SERVER['HTTPS'])?"https://" : "http://") . gethostbyname(gethostname()). str_replace($_SERVER['DOCUMENT_ROOT'], "", ROOT));
 define("DATABASES", ROOT."dbDomande/");
 define("INCLUDES", ROOT."lib/");
 define("STEPS", ROOT."steps/");
 define("STATICS", ROOT."static/");
 define("ACCESSI", ROOT."accessi.txt");
 define("CODAEVENTI", ROOT."eventi.txt");
-define("PINGTIMEOUT",30);
+define("PINGTIMEOUT",15);
+define("PREFISSO", "PIevent.");
 
 function getExtension($nomeFile){
 	$pos = strrpos($nomeFile, ".");
