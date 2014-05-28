@@ -15,7 +15,7 @@ function setSerializzato($accessi,$file = ACCESSI){
     $fp = fopen($file ,"w");
 	$tentativi = 0;
 	while(!flock($fp,LOCK_EX)){
-		sleep(0.1);
+		sleep(mt_rand(0,10)/100);
 		$tentativi ++;
 		if($tentativi > 10)
 		    die("mannaggia");
