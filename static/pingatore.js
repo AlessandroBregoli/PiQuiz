@@ -3,3 +3,6 @@ var pingInterval = setInterval(function(){
 		ajax.open("GET",entryFile + "ping",true);
 		ajax.send(null);
 	}, pingInterval);
+function stopPing(){
+	clearInterval(pingInterval);
+}

@@ -46,4 +46,5 @@ function arrossisci(colore){
 	document.body.style.background = colore;
 }
 EventLib.registerService("arrossisci", arrossisci);
+EventLib.registerService("sincroUtenti", controllaUtenti);
 var intervallo1 = setInterval(EventLib.pollEventi, pollingInterval);

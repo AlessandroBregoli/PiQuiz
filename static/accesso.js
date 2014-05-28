@@ -1,13 +1,12 @@
 var superClient = false;
 getStep(entryFile+"controllaAccesso", function(risposta){
-	alert(risposta.data);
 	if(risposta.tipo == 1){
 		$('registrazione').style.display="block";
-		if(risposta.data.seiSuper){
-			sonoSuper();
-		}
 	}
 	else{
+		if(risposta.data && risposta.data.seiSuper){
+			sonoSuper();
+		}
 		paginaSetup();
 	}
 });
@@ -29,6 +28,10 @@ function paginaSetup(){
 	//l'utente è registato
 	$('registrazione').style.display="none";
 }
+window.addEventListener('unload',function(){
+		//stopPing();
+		getStep(entryFile+"logout",false,null,true);
+	});
 
 function sonoSuper(){
 	superClient = true;
@@ -51,7 +54,7 @@ $('clicche2').onclick = function(){
 
 $('logout').onclick = function(){
 	clearInterval(pingInterval);
-	getStep(entryFile + "testing_logout", function(){
+	getStep(entryFile + "logout", function(){
 		document.location.reload(); 
 	})
 }

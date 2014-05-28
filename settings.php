@@ -11,7 +11,7 @@ define("STEPS", ROOT."steps/");
 define("STATICS", ROOT."static/");
 define("ACCESSI", ROOT."accessi.txt");
 define("CODAEVENTI", ROOT."eventi.txt");
-define("PINGTIMEOUT",15);
+define("PINGTIMEOUT",20);
 define("PREFISSO", "PIevent.");
 
 function getExtension($nomeFile){

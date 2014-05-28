@@ -21,13 +21,13 @@ function newAjax() {
 	return xmlHttp;
 }
 
-function getStep(src,func,argomenti){
+function getStep(src,func,argomenti,sincrono){
 	var ajax= newAjax();
 	if(argomenti){
 		var json = JSON.stringify(argomenti);
 		src += "&dati=" + encodeURIComponent(json);
 	}
-	ajax.open("GET",src,true);
+	ajax.open("GET",src,!sincrono);
 	ajax.send(null);
 	ajax.onreadystatechange= function(){
 		if (ajax.readyState == 4) {
