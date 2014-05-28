@@ -1,20 +1,24 @@
 var superClient = false;
-getStep(entryFile+"controllaAccesso", function(risposta){
+getStep("controllaAccesso", function(risposta){
 	if(risposta.tipo == 1){
 		$('registrazione').style.display="block";
 	}
 	else{
-		if(risposta.data && risposta.data.seiSuper){
-			sonoSuper();
+		if(risposta.data){
+			if(risposta.data.seiSuper){
+				sonoSuper();
+			}
+			$('nomeutente').innerHTML= risposta.data.utente;
+			paginaSetup();
 		}
-		paginaSetup();
 	}
 });
 $('registrazione').addEventListener("submit", function(ev){
 		var argV = getInputValues(this);
-		getStep(entryFile + "uniscitiAlGioco", function(risposta){
+		getStep("uniscitiAlGioco", function(risposta){
 			if(risposta.tipo == 0){
 				paginaSetup();
+				$('nomeutente').innerHTML= argV.registerUname;
 			}
 		}, argV);
 		try{
@@ -28,15 +32,15 @@ function paginaSetup(){
 	//l'utente è registato
 	$('registrazione').style.display="none";
 }
-window.addEventListener('unload',function(){
-		//stopPing();
-		getStep(entryFile+"logout",false,null,true);
+window.addEventListener('close',function(){
+		stopPing();
+		getStep("logout",false,null,true);
 	});
 
 function sonoSuper(){
 	superClient = true;
 	EventLib.prefisso = Dispositivo.superClient;
-	alert("sono super!");
+	$('nomeutente').style.fontWeight= 'bold';
 }
 EventLib.init(Dispositivo.client);
 EventLib.registerService("seiSuper", sonoSuper);
@@ -53,8 +57,8 @@ $('clicche2').onclick = function(){
 }
 
 $('logout').onclick = function(){
-	clearInterval(pingInterval);
-	getStep(entryFile + "logout", function(){
+	stopPing();
+	getStep("logout", function(){
 		document.location.reload(); 
 	})
 }

@@ -1,14 +1,19 @@
 <?php
-function getSerializzato($file = ACCESSI){
+function getSerializzato($file,$printer=false){
     if(!file_exists($file)){
-        $fp= fopen($file,"w");
-        fwrite($fp,serialize(array()));
-        fclose($fp);
+        return array();
     }
     $fp= fopen($file,"r");
     $tentativi = 0;
-    if(flock($fp,LOCK_EX)){
-	$accessi = unserialize(fread($fp,filesize($file)));
+    if(flock($fp,LOCK_SH)){
+	$size=filesize($file);
+	$contenutoFile = file_get_contents($file);
+	$accessi = unserialize(base64_decode($contenutoFile));
+	if($accessi === false){
+	    debug_print_backtrace();
+	    echo base64_decode($contenutoFile);
+	    echo "\n$size, ".strlen($contenutoFile)." " .filesize($file);
+	}
     }
     else{
 	die("mannaggia");
@@ -18,11 +23,11 @@ function getSerializzato($file = ACCESSI){
     return $accessi;
 }
 
-function setSerializzato($accessi,$file = ACCESSI){
-    $fp = fopen($file ,"w");
-    $tentativi = 0;
+function setSerializzato($accessi,$file){
+    $fp = fopen($file ,"c");
     if(flock($fp,LOCK_EX)){
-	fwrite($fp,serialize($accessi));
+	ftruncate($fp,0);
+	fwrite($fp,base64_encode(serialize($accessi)));
 	fflush($fp);
     }
     else{

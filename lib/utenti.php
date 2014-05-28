@@ -15,16 +15,16 @@ class Utente{
 }
 function aggiungiPunti($nome, $punteggio){
     if(trim($nome) != ""){
-	$accessi = getSerializzato();
+	$accessi = getSerializzato(ACCESSI);
 	if(isset($accessi[$nome])){
 	    $accessi[$nome]->calcolaPunteggio($punteggio);
-	    setSerializzato($accessi);
+	    setSerializzato($accessi,ACCESSI);
 	}
     }
 }
 function registerUser($nome){
     if(trim($nome) != ""){
-	$accessi = getSerializzato();
+	$accessi = getSerializzato(ACCESSI);
 	$super = count($accessi) == 0;
 	if($super){
 	    aggiungiEvento(new Evento($nome, DispositivoClient."seiSuper"));
@@ -34,16 +34,16 @@ function registerUser($nome){
 	    $accessi[$nome]->timestamp= time();
 	//altrimenti lo aggiunge.
 	else $accessi[$nome] = new Utente(time(),$super);
-	setSerializzato($accessi);
+	setSerializzato($accessi,ACCESSI);
     }
 }
 
 function checkUsers(){
     $time = time();
-    $accessi = getSerializzato();
+    $accessi = getSerializzato(ACCESSI);
     $modificato = false;
     foreach($accessi as $nome=>$Utente){
-	if ($time - $Utente->timestamp > PINGTIMEOUT){
+	if (($time - $Utente->timestamp) > PINGTIMEOUT){
 	    if ($accessi[$nome]->super){
 		//se l'utente è superutente, facciamo diventare super il primo della lista
 		unset($accessi[$nome]);
@@ -60,12 +60,12 @@ function checkUsers(){
 	}
     }
     if($modificato)
-	setSerializzato($accessi);
+	setSerializzato($accessi,ACCESSI);
 }
 function checkPing($uname){
     //controlla se l'utente è nei ping
     
-    $accessi = getSerializzato();
+    $accessi = getSerializzato(ACCESSI);
     return isset($accessi[$uname]);
 }
 function getSuperClient(){

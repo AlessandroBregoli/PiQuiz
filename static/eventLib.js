@@ -28,11 +28,11 @@ var EventLib = {
 			}
 		}
 		else {
-			getStep(entryFile + "invoca_servizio", function(){}, {'servizio': nomeServizio, 'argomenti': argList ? argList : {}});
+			getStep("invoca_servizio", function(){}, {'servizio': nomeServizio, 'argomenti': argList ? argList : {}});
 		}
 	},
 	pollEventi : function(){
-		getStep(entryFile + "coda_servizi", function(risposta){
+		getStep("coda_servizi", function(risposta){
 			for(x in risposta.data){
 				EventLib.requireService(risposta.data[x].nomeServizio, risposta.data[x].data);
 			}

@@ -30,7 +30,7 @@ var eventsLoop = setInterval(function(){
 		
 	}, eventsLoopInterval);*/
 function controllaUtenti(){
-	getStep(entryFile + "listaUtenti", function(risposta){
+	getStep("listaUtenti", function(risposta){
 			if (risposta.tipo == 0){
 				TV.setUtenti(risposta.data);
 			}

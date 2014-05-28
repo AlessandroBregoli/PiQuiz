@@ -27,7 +27,7 @@ function getStep(src,func,argomenti,sincrono){
 		var json = JSON.stringify(argomenti);
 		src += "&dati=" + encodeURIComponent(json);
 	}
-	ajax.open("GET",src,!sincrono);
+	ajax.open("GET",entryFile + src,!sincrono);
 	ajax.send(null);
 	ajax.onreadystatechange= function(){
 		if (ajax.readyState == 4) {
