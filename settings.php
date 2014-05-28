@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-define("ROOT", realpath(dirname(__FILE__))."/");
+define("ROOT", str_replace("\\","/",realpath(dirname(__FILE__))."/"));
 define("DOCROOT", str_replace("\\","/",$_SERVER['DOCUMENT_ROOT']));
 define("ROOTURI", (isset($_SERVER['HTTPS'])?"https://" : "http://") . gethostname() . str_replace(DOCROOT, "", ROOT));
 define("ROOTURIIP", (isset($_SERVER['HTTPS'])?"https://" : "http://") . gethostbyname(gethostname()). str_replace(DOCROOT, "", ROOT));
