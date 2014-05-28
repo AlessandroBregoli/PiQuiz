@@ -2,8 +2,9 @@
 
 session_start();
 define("ROOT", realpath(dirname(__FILE__))."/");
-define("ROOTURI", (isset($_SERVER['HTTPS'])?"https://" : "http://") . gethostname() . str_replace($_SERVER['DOCUMENT_ROOT'], "", ROOT));
-define("ROOTURIIP", (isset($_SERVER['HTTPS'])?"https://" : "http://") . gethostbyname(gethostname()). str_replace($_SERVER['DOCUMENT_ROOT'], "", ROOT));
+define("DOCROOT", str_replace("\\","/",$_SERVER['DOCUMENT_ROOT']);
+define("ROOTURI", (isset($_SERVER['HTTPS'])?"https://" : "http://") . gethostname() . str_replace(DOCROOT, "", ROOT));
+define("ROOTURIIP", (isset($_SERVER['HTTPS'])?"https://" : "http://") . gethostbyname(gethostname()). str_replace(DOCROOT, "", ROOT));
 define("DATABASES", ROOT."dbDomande/");
 define("INCLUDES", ROOT."lib/");
 define("STEPS", ROOT."steps/");

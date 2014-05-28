@@ -23,8 +23,8 @@
 	$time3 = microtime();
 	setSerializzato($coda, CODAEVENTI);
 	$time4 = microtime();
-	$fp= fopen("timing.txt","w+");
-	fwrite($fp,($time2- $time1) ." ". ($time4-$time3));
-	fclose($fp);
+	//$fp= fopen("timing.txt","w+");
+	//fwrite($fp,($time2- $time1) ." ". ($time4-$time3));
+	//fclose($fp);
 	$risposta = new Risposta("Eventi", TipoRisposta::Successo, $return);
 ?>

@@ -1,12 +1,7 @@
 <?php
 $users= getSerializzato(ACCESSI);
-try{
-	if(isset($_SESSION['uname'])){
-		unset($users[$_SESSION['uname']]);
-		unset($_SESSION['uname']);
-	}
-}
-catch(Exception $e){}
+$users[$_SESSION['uname']]->timestamp = 0;
 setSerializzato($users,ACCESSI);
+checkUsers();
 $risposta = new Risposta("Logout");
 ?>
