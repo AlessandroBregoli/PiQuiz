@@ -1,11 +1,6 @@
-var superClient = false;
 getStep(entryFile+"controllaAccesso", function(risposta){
-	alert(risposta.data);
 	if(risposta.tipo == 1){
 		$('registrazione').style.display="block";
-		if(risposta.data.seiSuper){
-			sonoSuper();
-		}
 	}
 	else{
 		paginaSetup();
@@ -30,16 +25,9 @@ function paginaSetup(){
 	$('registrazione').style.display="none";
 }
 
-function sonoSuper(){
-	superClient = true;
-	EventLib.prefisso = Dispositivo.superClient;
-	alert("sono super!");
-}
 EventLib.init(Dispositivo.client);
-EventLib.registerService("seiSuper", sonoSuper);
 EventLib.pollEventi();
 var intervallo1 = setInterval(EventLib.pollEventi, pollingInterval);
-
 
 $('clicche').onclick = function(){
 	EventLib.requireService("PIevent.tv.arrossisci",['green']);
@@ -47,6 +35,7 @@ $('clicche').onclick = function(){
 
 $('clicche2').onclick = function(){
 	EventLib.requireService("PIevent.tv.arrossisci",['red']);
+<<<<<<< HEAD
 }
 
 $('logout').onclick = function(){
@@ -54,4 +43,6 @@ $('logout').onclick = function(){
 	getStep(entryFile + "testing_logout", function(){
 		document.location.reload(); 
 	})
+=======
+>>>>>>> 786aa09a6b3dc0ee3b6364c5514fddf1e5074d52
 }

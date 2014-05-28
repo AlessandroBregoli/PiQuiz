@@ -26,6 +26,9 @@ function registerUser($nome){
     if(trim($nome) != ""){
 	$accessi = getSerializzato();
 	$super = count($accessi) == 0;
+	if($super){
+	    aggiungiEvento(new Evento($nome, DispositivoClient."seiSuper"));
+	}
 	//se l'utente esiste, aggiorna il taimstamp del ping
 	if(isset($accessi[$nome]))
 	    $accessi[$nome]->timestamp= time();
@@ -42,10 +45,12 @@ function checkUsers(){
     foreach($accessi as $nome=>$Utente){
 	if ($time - $Utente->timestamp > PINGTIMEOUT){
 	    if ($accessi[$nome]->super){
+		//se l'utente è superutente, facciamo diventare super il primo della lista
 		unset($accessi[$nome]);
 		$chiavi = array_keys($accessi);
 		if(isset($chiavi[0])){
 		    $accessi[$chiavi[0]]->super = true;
+		    aggiungiEvento(new Evento($chiavi[0], DispositivoClient."seiSuper"));
 		}
 	    }
 	    else{

@@ -19,15 +19,16 @@ var TV = {
 		}
 	}
 }
+/*
 var eventsLoop = setInterval(function(){
 		getStep(entryFile + "TVEventi", function(risposta){
 			
 		});
 		/*var ajax= newAjax();
 		ajax.open("GET",entryFile + "pulisciAccessi",true);
-		ajax.send(null);*/
+		ajax.send(null);
 		
-	}, eventsLoopInterval);
+	}, eventsLoopInterval);*/
 function controllaUtenti(){
 	getStep(entryFile + "listaUtenti", function(risposta){
 			if (risposta.tipo == 0){

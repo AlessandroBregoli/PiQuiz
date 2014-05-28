@@ -6,7 +6,7 @@ class Evento{
 	public $nomeServizio;
 	public $data;
 	public $a;
-	public function __construct($a, $nomeServizio, $argomenti){
+	public function __construct($a, $nomeServizio, $argomenti=array()){
 		$this->a = $a;
 		$this->nomeServizio = $nomeServizio;
 		$this->data = $argomenti;

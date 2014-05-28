@@ -18,7 +18,7 @@ function setSerializzato($accessi,$file = ACCESSI){
 		sleep(0.1);
 		$tentativi ++;
 		if($tentativi > 10)
-		    die();
+		    die("mannaggia");
 	}
 	fwrite($fp,serialize($accessi));
 	flock($fp,LOCK_UN);

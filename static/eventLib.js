@@ -1,13 +1,14 @@
 
 var Dispositivo = {
-	client : [1, prefisso + "client."],
-	tv : [2, prefisso + "tv."]
+	client : prefisso + "client.",
+	superClient : prefisso + "superClient.",
+	tv : prefisso + "tv."
 }
 var EventLib = {
 	serviceDict : {},
 	prefisso : {},
 	init : function(dispositivo){
-		this.prefisso = dispositivo[1];
+		this.prefisso = dispositivo;
 	},
 	registerService : function(nomeServizio, funzione, callingObject){
 		nomeServizio = this.prefisso + nomeServizio;
@@ -16,14 +17,14 @@ var EventLib = {
 		this.serviceDict[nomeServizio] = [funzione, callingObject];
 	},
 	requireService : function(nomeServizio, argList){
-		if (nomeServizio.indexOf(this.prefisso) != -1){
+		if (nomeServizio.indexOf(EventLib.prefisso) != -1){
 			//se il servizio è locale, lo eseguiamo e basta
-			if(nomeServizio in this.serviceDict){
-				var serv = this.serviceDict[nomeServizio]
+			if(nomeServizio in EventLib.serviceDict){
+				var serv = EventLib.serviceDict[nomeServizio]
 				serv[0].apply(serv[1],argList);
 			}
 			else {
-				alert("servizio "+nomeServizio+" non trovato");
+				alert("servizio "+nomeServizio+" non trovato. servizi=" + EventLib.serviceDict);
 			}
 		}
 		else {
@@ -35,6 +36,6 @@ var EventLib = {
 			for(x in risposta.data){
 				EventLib.requireService(risposta.data[x].nomeServizio, risposta.data[x].data);
 			}
-		}, {'sonolatv': (EventLib.prefisso == Dispositivo.tv[1])});
+		}, {'sonolatv': (EventLib.prefisso == Dispositivo.tv)});
 	}
 }
